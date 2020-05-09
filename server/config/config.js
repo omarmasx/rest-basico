@@ -23,7 +23,7 @@ process.env.PORT = process.env.PORT || 3000;
             //remota(nube)//   PARAMETROS CONNECT APLICATION FOR URI ENCODED =>    //userDB:cafe-user      passDB:12345678910      Database:cafe   Collection:usuario
                                 
                  //mongodb+srv://strider:<password>@cluster0-qhnym.mongodb.net/test?retryWrites=true&w=majority  
-        urlDB = 'mongodb+srv://cafe-user:12345678910@cluster0-qhnym.mongodb.net/cafe?retryWrites=true&w=majority';      
+        urlDB = process.env.MONGO_URI;// variable de heroku      
     }
     //Si comento las lineas: 18-22  y la 27 puedo hacer prueba de DB remota(mongo DB Atlas)
     
