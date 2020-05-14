@@ -7,8 +7,22 @@ process.env.PORT = process.env.PORT || 3000;
 // ============================
 //  Entorno
 // ============================
-        //variable establecida en heroku
-    process.env.NODE_ENV = process.env.NODE_ENV || 'dev'
+    process.env.NODE_ENV = process.env.NODE_ENV || 'dev'   //variable establecida en heroku o dev de desarrollo
+
+// ============================
+//  Vencimiento del token
+// ============================
+//60 segundo 
+//60 minutos
+//24 horas
+//30 dias      toquen con vigencia de un mes
+process.env.CADUCIDAD_TOKEN = 1000* 60 * 60 * 24 *30;//ms, s, m, h,d
+
+// ============================
+//  SEED (semilla) de autenticacion
+// ============================
+process.env.SEED = process.env.SEED || 'este es el seed de desarrollo'; //process.env.SEED === variable de Heroku(producccion) O si no de desarrollo     
+                                                                        //VER IMAGEN 122 variable de entorno heroku
 
 
 // ============================
