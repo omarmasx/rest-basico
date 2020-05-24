@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+ <html lang="en"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="viewport" content="width=device-width,">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="">
+
+        <script src="https://apis.google.com/js/platform.js" async defer></script>      <!-- Library that include sign in of GOOGLE  -->
+        <meta name="google-signin-client_id" content="668908998277-nvf4vfja7id29062fj1f46269logprmq.apps.googleusercontent.com">    <!-- Specify in the app's client ID -->
+
+
+    </head>
+    <body>
+
+        <div class="g-signin2" data-onsuccess="onSignIn"></div> <!-- Add a Google Sign-In button -->
+        <script>
+
+            function onSignIn(googleUser) { 
+
+                var profile = googleUser.getBasicProfile();
+                console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
+                console.log('Name: ' + profile.getName());
+                console.log('Image URL: ' + profile.getImageUrl());
+                console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
+
+                var id_token = googleUser.getAuthResponse().id_token;   ///GET the user's ID TOKEN
+                            console.log( id_token);
+
+
+                // //SEND the ID_TOKEN to SERVER with an HTTPS POST request
+                var xhr = new XMLHttpRequest();
+                xhr.open('POST', '/google');
+                xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+                xhr.onload = function() {
+                console.log('Signed in as: ' + xhr.responseText);   // responseText	=== The response data as a string
+                };
+                xhr.send('idtoken='+ id_token); // send(string)	Sends a request string to the server (used for POST)     //  xhttp.send("fname=Henry&lname=Ford");       ===>Hello Henry Ford
+                        // se pasa como si fuera un parametro cadena URL ===> string concatenada con una variable que se convertira a string         
+
+
+
+            }
+
+        </script>
+
+
+        <a href="#" onclick="signOut();">Sign out</a>
+        <script>
+            function signOut() {
+                var auth2 = gapi.auth2.getAuthInstance();
+                auth2.signOut().then(function () {
+                    console.log('User signed out.');
+                });
+            }
+        </script>
+
+    </body>
+</html>
+<!-- Habilitaremos la carpeta PUBLIC y este documento usando un middleware en server.js -->

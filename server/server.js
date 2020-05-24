@@ -6,12 +6,16 @@ const express = require('express');
 const app = express();
 
 const bodyParser = require('body-parser');    // esta linea se puede meter en aArchivo de CONFIG.JS PERO LO DEJAREMOS AQUI PARA QUE VEAN RApidamente que necesita server
+const path = require('path'); // paquete de node por defecto, dar en un formato adecuado las rutas(concatenaciones)
+
 
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: false }))   
 
 // parse application/json
-app.use(bodyParser.json())
+app.use(bodyParser.json());
+
+app.use( express.static( path.resolve(__dirname,'../public')));//Agregamos el contenido de la carpeta public y resolvemos la ruta con Path, Si no se especifica el archivo cargara INDEX.HTML  BROWSER==>localhost:3000  === localhost:3000/index.html
 
     // SUSUTITUIMOS VARIAS RUTAS POR UN DOCUMENTO QUE CONTENGA TODAS ELLAS DANDO MEJOR PRESENTACION ESTE SERA index.js
 // app.use(require('./routes/usuario'));
